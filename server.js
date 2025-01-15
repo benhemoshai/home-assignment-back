@@ -8,11 +8,15 @@ import { fileURLToPath } from 'url';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 
+import dotenv from 'dotenv';
+dotenv.config();
+
+
 const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: '*', // Adjust this to your frontend's URL for security
+    origin: process.env.FRONTEND_URL, 
     methods: ['GET', 'PUT', 'POST']
   }
 });
@@ -27,7 +31,7 @@ const carsList = cars;
 
 // GET /cars - Fetch all cars
 app.get('/cars', (req, res) => {
-  res.json(carsList);
+  res.status(200).json(carsList);
 });
 
 // PUT /cars/:id - Increment votes for a specific car
@@ -49,7 +53,8 @@ app.put('/cars/:id', async (req, res) => {
     await fs.writeFile(carsFilePath, fileContent);
 
     // Notify connected clients about the vote update
-    io.emit('car-votes-updated', { car });
+    io.emit('updateCars', carsList);
+
 
     res.status(200).json({ car });
   } catch (err) {
@@ -61,11 +66,6 @@ app.put('/cars/:id', async (req, res) => {
 // Socket.IO setup
 io.on('connection', (socket) => {
   console.log('New client connected:', socket.id);
-
-  // Handle custom events if needed
-  socket.on('example-event', (data) => {
-    console.log('Received example event:', data);
-  });
 
   // Handle client disconnect
   socket.on('disconnect', () => {
