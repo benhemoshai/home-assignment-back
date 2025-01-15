@@ -1,16 +1,16 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import { cars } from './cars.js';
+import { cars } from './data/cars.js';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
-
 import dotenv from 'dotenv';
-dotenv.config();
 
+//Configurating the .env file
+dotenv.config();
 
 const app = express();
 const httpServer = createServer(app);
@@ -47,8 +47,8 @@ app.put('/cars/:id', async (req, res) => {
   car.votes++;
 
   try {
-    // Save the updated cars array back to the file
-    const carsFilePath = path.join(__dirname, 'cars.js');
+    // Save the updated cars list back to the file
+    const carsFilePath = path.join(__dirname, 'data/cars.js');
     const fileContent = `export const cars = ${JSON.stringify(carsList, null, 2)};`;
     await fs.writeFile(carsFilePath, fileContent);
 
