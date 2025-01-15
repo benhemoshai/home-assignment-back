@@ -3,13 +3,13 @@ export const cars = [
     "id": 1,
     "name": "Tesla",
     "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaf-GGyvQ7wmmmXnLgbF5MVfArdlQ4npGhxA&s",
-    "votes": 50
+    "votes": 64
   },
   {
     "id": 2,
     "name": "Audi A3",
     "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiIW7w7yWCIEDdiREv4qZqlc2IV2ebZCXGdg&s",
-    "votes": 47
+    "votes": 53
   },
   {
     "id": 3,
@@ -21,7 +21,7 @@ export const cars = [
     "id": 4,
     "name": "Honda Civic",
     "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT90EmVeKDHt3HJBhhk41hdB0-LBiu1iVSW2Q&s",
-    "votes": 51
+    "votes": 54
   },
   {
     "id": 5,
